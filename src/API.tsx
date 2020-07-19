@@ -4,7 +4,7 @@ export type Question = {
     category: string;
     correct_answer: string;
     difficulty: string;
-    incorrect_answer: string[];
+    incorrect_answers: string[];
     question: string;
     type: string;
 };
@@ -24,10 +24,10 @@ export const fetchQuizQuestions = async (amount: number, difficulty: Difficulty)
     //console.log(data);
     return data.results.map((question: Question) => (
         {
-            ...question, // three dots mean 'spread', so this spreads all of properties of question into this resulting data.results object
+            ...question, // three dots mean 'spread', so this spreads all of properties of question into this data.results object
             // i.e. if question = { category: 'whofuckingcares', difficulty: 'ez' }
             // then {...question} = { category: 'whofuckingcares', difficulty: 'ez' }
-            answer: shuffleArray([...question.incorrect_answer, question.correct_answer])
+            answers: shuffleArray([...question.incorrect_answers, question.correct_answer])
         }
     ))
 }
